@@ -54,4 +54,30 @@ public class Part05MergeTest {
 				.verifyComplete();
 	}
 
+	@Test
+	public void givenFluxes_whenCombineLatestIsInvoked_thenCombineLatest() {
+
+		Flux<Integer> evenNumbers = Flux
+				.range(1, 5)
+				.filter(x -> x % 2 == 0)
+				.log(); // i.e. 2, 4
+
+		Flux<Integer> oddNumbers = Flux
+				.range(1, 5)
+				.filter(x -> x % 2 > 0);  // ie. 1, 3, 5
+
+		Flux<Integer> fluxOfIntegers = Flux.combineLatest(
+				evenNumbers,
+				oddNumbers,
+				(a, b) -> a + b)
+				.log();
+
+		StepVerifier.create(fluxOfIntegers)
+				.expectNext(5) // 4 + 1
+				.expectNext(7) // 4 + 3
+				.expectNext(9) // 4 + 5
+				.expectComplete()
+				.verify();
+	}
+
 }

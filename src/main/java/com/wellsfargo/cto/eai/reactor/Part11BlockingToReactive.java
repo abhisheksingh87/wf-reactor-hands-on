@@ -35,8 +35,9 @@ public class Part11BlockingToReactive {
 	//  Insert users contained in the Flux parameter in the blocking repository using an elastic scheduler and return a Mono<Void> that signal the end of the operation
 	Mono<Void> fluxToBlockingRepository(Flux<User> flux, BlockingRepository<User> repository) {
 		return flux
+				.filter(user -> user.getUsername().equals("rohan"))
 				.publishOn(Schedulers.elastic())
-				.doOnNext(repository::save)
+				.doOnNext(user -> repository.save(user))
 				.then(); 
 	}
 
