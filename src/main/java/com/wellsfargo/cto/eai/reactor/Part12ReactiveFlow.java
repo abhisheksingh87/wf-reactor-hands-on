@@ -10,7 +10,8 @@ import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
 /**
- *
+ * Learn how to create Sequential and Parallel Flow using
+ * Flux and ParallelFlux
  *
  */
 public class Part12ReactiveFlow {

@@ -38,7 +38,4 @@ public class Part04Transform {
 		return Mono.just(new User(u.getUsername().toUpperCase(), u.getFirstname().toUpperCase(), u.getLastname().toUpperCase()));
 	}
 
-	//additional examples for flatMap
-
-
 }
